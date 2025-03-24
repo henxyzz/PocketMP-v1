@@ -12,46 +12,41 @@ import java.util.List;
 
 public class PluginAdapter extends RecyclerView.Adapter<PluginAdapter.ViewHolder> {
     private List<Plugin> plugins;
-    
+
     public PluginAdapter(List<Plugin> plugins) {
         this.plugins = plugins;
     }
-    
+
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
             .inflate(R.layout.item_plugin, parent, false);
         return new ViewHolder(view);
     }
-    
+
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Plugin plugin = plugins.get(position);
-        holder.nameText.setText(plugin.getName());
-        holder.statusText.setText(plugin.getStatus());
-        holder.sizeText.setText(formatSize(plugin.getSize()));
+        holder.pluginName.setText(plugin.getName());
+        holder.pluginStatus.setText(plugin.getStatus());
+        holder.pluginSize.setText(String.format("%.2f MB", plugin.getSize() / 1024.0 / 1024.0));
     }
-    
+
     @Override
     public int getItemCount() {
         return plugins.size();
     }
-    
-    private String formatSize(long bytes) {
-        if (bytes < 1024) return bytes + " B";
-        int exp = (int) (Math.log(bytes) / Math.log(1024));
-        String pre = "KMGTPE".charAt(exp-1) + "";
-        return String.format("%.1f %sB", bytes / Math.pow(1024, exp), pre);
-    }
-    
-    static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView nameText, statusText, sizeText;
-        
-        ViewHolder(View view) {
+
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        public TextView pluginName;
+        public TextView pluginStatus;
+        public TextView pluginSize;
+
+        public ViewHolder(View view) {
             super(view);
-            nameText = view.findViewById(R.id.plugin_name);
-            statusText = view.findViewById(R.id.plugin_status);
-            sizeText = view.findViewById(R.id.plugin_size);
+            pluginName = view.findViewById(R.id.plugin_name);
+            pluginStatus = view.findViewById(R.id.plugin_status);
+            pluginSize = view.findViewById(R.id.plugin_size);
         }
     }
 }

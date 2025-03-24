@@ -1,0 +1,44 @@
+name: Build & Release Signed APK
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Generate Keystore
+        run: |
+          keytool -genkeypair -v -keystore release-key.jks \
+            -keyalg RSA -keysize 2048 -validity 10000 \
+            -storepass "mypassword" -keypass "mypassword" \
+            -alias "my-key-alias" -dname "CN=MyApp, OU=Org, O=Company, L=City, S=State, C=ID"
+
+      - name: Build Release APK
+        run: ./gradlew assembleRelease
+
+      - name: Sign APK
+        run: |
+          jarsigner -verbose -sigalg SHA256withRSA -digestalg SHA-256 \
+            -keystore release-key.jks \
+            -storepass "mypassword" -keypass "mypassword" \
+            app/build/outputs/apk/release/app-release-unsigned.apk \
+            "my-key-alias"
+
+      - name: Upload APK Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-release.apk
+          path: app/build/outputs/apk/release/app-release.apk

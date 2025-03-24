@@ -1,0 +1,63 @@
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/server_status"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Server Status: Stopped"/>
+
+    <TextView
+        android:id="@+id/console_output"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="#1B1B1B"
+        android:textColor="#FFFFFF"
+        android:padding="8dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/command_input"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="Enter command"/>
+
+        <Button
+            android:id="@+id/send_command"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Send"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/start_server"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Start"/>
+
+        <Button
+            android:id="@+id/stop_server"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Stop"/>
+    </LinearLayout>
+
+</LinearLayout>

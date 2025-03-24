@@ -43,14 +43,32 @@ public class ConsoleFragment extends Fragment {
 
     private void sendCommandToServer() {
         String command = commandInput.getText().toString();
-        // TODO: Send command to server process
+        Intent intent = new Intent(getContext(), ServerService.class);
+        intent.setAction("SEND_COMMAND");
+        intent.putExtra("command", command);
+        getContext().startService(intent);
+        commandInput.setText("");
     }
 
     private void startMinecraftServer() {
-        // TODO: Start PocketMine-MP server
+        Intent intent = new Intent(getContext(), ServerService.class);
+        intent.setAction("START_SERVER");
+        getContext().startService(intent);
+        serverStatus.setText("Status: Memulai server...");
+        startServer.setEnabled(false);
+        stopServer.setEnabled(true);
     }
 
     private void stopMinecraftServer() {
-        // TODO: Stop PocketMine-MP server
+        Intent intent = new Intent(getContext(), ServerService.class);
+        intent.setAction("STOP_SERVER");
+        getContext().startService(intent);
+        serverStatus.setText("Status: Menghentikan server...");
+        startServer.setEnabled(true);
+        stopServer.setEnabled(false);
+    }
+
+    private void updateConsole(String text) {
+        consoleOutput.append(text + "\n");
     }
 }

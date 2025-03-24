@@ -1,0 +1,14 @@
+
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="neon_blue">#00BCD4</color>
+    <color name="neon_cyan">#80DEEA</color>
+    <color name="dark_bg">#102027</color>
+    <color name="text_primary">#E0F7FA</color>
+    <color name="text_secondary">#B2EBF2</color>
+    
+    <selector xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/nav_item_color">
+        <item android:state_checked="true" android:color="@color/neon_blue"/>
+        <item android:color="@color/text_secondary"/>
+    </selector>
+</resources>

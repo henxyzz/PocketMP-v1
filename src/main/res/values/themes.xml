@@ -1,0 +1,11 @@
+
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.SciFiServer" parent="Theme.MaterialComponents.DayNight">
+        <item name="colorPrimary">#00BCD4</item>
+        <item name="colorSecondary">#80DEEA</item>
+        <item name="android:windowBackground">#102027</item>
+        <item name="android:textColor">#E0F7FA</item>
+        <item name="android:fontFamily">@font/roboto_mono</item>
+    </style>
+</resources>
